@@ -21,9 +21,9 @@ from services.chroma_service import init_chroma
 async def lifespan(app: FastAPI):
     # Initialize persistent ChromaDB vector store
     init_chroma()
-    print("✅ EVIDRA Vector Database ready.")
+    print("[EVIDRA] Vector Database ready.")
     yield
-    print("👋 EVIDRA Backend shutting down.")
+    print("[EVIDRA] Backend shutting down.")
 
 
 app = FastAPI(

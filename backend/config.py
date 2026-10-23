@@ -34,7 +34,14 @@ EMBED_DIMENSION     = int(os.getenv("EMBED_DIMENSION", "3072"))
 # ==============================================================================
 # 3. CHROMADB VECTOR STORE
 # ==============================================================================
-CHROMA_PERSIST_DIR  = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
+_raw_persist = os.getenv("CHROMA_PERSIST_DIR", "")
+if _raw_persist and os.path.isabs(_raw_persist):
+    CHROMA_PERSIST_DIR = _raw_persist
+else:
+    # Anchor relative path to project root so backend and root scripts share the same store
+    _project_root = Path(__file__).resolve().parent.parent
+    CHROMA_PERSIST_DIR = str(_project_root / (_raw_persist.lstrip("./") if _raw_persist else "chroma_db"))
+
 CHROMA_COLLECTION   = os.getenv("CHROMA_COLLECTION", "evidra_documents")
 
 # ==============================================================================
