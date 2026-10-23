@@ -1,6 +1,7 @@
 # EVIDRA: Academic Benchmark Evaluation Report
 **Track B — Option 1: Evidence-Grounded Document Intelligence**  
-**Evaluation Date:** 2026-10-23T19:15:39Z  
+**Evaluation Date:** 2026-10-23T20:01:00Z  
+**Evaluation Corpus:** Curated PDF Documents (`Digital_Personal_Data_Protection_Act_2023.pdf`, `WHO_Constitution.pdf`, `Universal_Declaration_of_Human_Rights.pdf`)  
 **Evaluation Model:** Groq `qwen/qwen3.8-27b` · **Embeddings:** Google Gemini `models/gemini-embedding-001` (3072-dim)  
 **Vector Distance Metric:** Cosine Distance ($d = 1.0 - S$) with Cosine Similarity Cutoff $S \ge 0.55$
 
@@ -8,19 +9,19 @@
 
 ## 1. Executive Summary & Aggregate Performance
 
-The evaluation was executed across **22 curated test questions** (16 answerable, 6 unanswerable/adversarial).
+The evaluation was executed across **22 curated test questions** (16 answerable, 6 unanswerable/adversarial) evaluated strictly against real PDF policy documents.
 
 | Metric | Target | Achieved Score | Evaluation Standard |
 |---|---|---|---|
-| **Retrieval Recall@K (Answerable)** | $\ge 85.0\%$ | **100.0%** | Evaluated on top-K ChromaDB chunks for true source and page presence |
+| **Retrieval Recall@K (Answerable)** | $\ge 85.0\%$ | **87.5%** | Evaluated on top-K ChromaDB chunks for true source and page presence |
 | **Multi-Part Factual Containment** | $\ge 90.0\%$ | **100.0%** | Requires all composite factual sub-claims to be verified |
-| **Citation Accuracy** | $\ge 85.0\%$ | **100.0%** | Valid citation ID, source, target page, and zero hallucinated IDs |
+| **Citation Accuracy** | $\ge 85.0\%$ | **81.82%** | Valid citation ID, source, target page, and zero hallucinated IDs |
 | **Abstention Accuracy** | $\ge 95.0\%$ | **100.0%** | Evaluated on unanswerable and adversarial questions |
-| **Overall Grounded Correctness** | $\ge 90.0\%$ | **100.0%** | Strict intersection of retrieval, factual accuracy, and citation validity |
+| **Overall Grounded Correctness** | $\ge 90.0\%$ | **81.82%** | Strict intersection of retrieval, factual accuracy, and citation validity |
 | **False Abstentions** | 0 | **0** | Zero false refusals on answerable documents |
 | **False Generations (Hallucinations)**| 0 | **0** | Zero hallucinations on out-of-corpus queries |
-| **Average Query Latency** | $< 12000\text{ms}$ | **4011.21 ms** | Complete pipeline round-trip time |
-| **P90 Latency** | $< 15000\text{ms}$ | **10075.47 ms** | 90th percentile response latency |
+| **Average Query Latency** | $< 12000\text{ms}$ | **12706.58 ms** | Complete pipeline round-trip time |
+| **P90 Latency** | $< 15000\text{ms}$ | **24774.0 ms** | 90th percentile response latency |
 
 ---
 
@@ -28,12 +29,12 @@ The evaluation was executed across **22 curated test questions** (16 answerable,
 
 | Question Category | Count | Overall Grounded Accuracy (%) | Mean Latency (ms) |
 |---|---|---|---|
-| **adversarial_outofscope** | 2 | 100.0% | 292.52 ms |
-| **difficult_retrieval** | 4 | 100.0% | 7819.96 ms |
-| **direct_factual** | 5 | 100.0% | 1120.22 ms |
-| **multi_evidence** | 3 | 100.0% | 9318.57 ms |
-| **paraphrased** | 4 | 100.0% | 4820.81 ms |
-| **unanswerable** | 4 | 100.0% | 885.39 ms |
+| **direct_factual** | 5 | 100.0% | 11902.38 ms |
+| **paraphrased** | 4 | 75.0% | 17258.55 ms |
+| **multi_evidence** | 3 | 33.33% | 17995.26 ms |
+| **difficult_retrieval** | 4 | 75.0% | 20381.05 ms |
+| **unanswerable** | 4 | 100.0% | 3713.91 ms |
+| **adversarial_outofscope** | 2 | 100.0% | 316.54 ms |
 
 ---
 
@@ -42,7 +43,9 @@ The evaluation was executed across **22 curated test questions** (16 answerable,
 Total questions evaluated: **22**.  
 Error breakdown across failure classifications:
 
-- **None**: 22 instances (100.0%)
+- **None**: 18 instances (81.8%)
+- **Retrieval Recall Miss**: 2 instances (9.1%)
+- **Citation Provenance Mismatch**: 2 instances (9.1%)
 
 ### Failure Taxonomy Analysis:
 1. **Hallucination / Failed Abstention**:
@@ -50,7 +53,7 @@ Error breakdown across failure classifications:
 2. **Retrieval Recall Miss**:
    - Checked whether the target page was indexed and ranked in the top-K retrieved results.
 3. **Factual Incompleteness**:
-   - Multi-part questions requiring multiple factual points (e.g. examination weights: 50%, 30%, 20%) verified all required elements.
+   - Multi-part questions requiring multiple factual points (e.g. statutory penalty values, DPO appointments, quorum thresholds) verified all required elements.
 4. **Citation Provenance Validity**:
    - Rejects answers that omit citation markers or cite hallucinated IDs ($N > K$).
 5. **Prompt Injection Guardrails**:
@@ -62,28 +65,28 @@ Error breakdown across failure classifications:
 
 | ID | Category | Expected | Actual Mode | Retrieval | Fact Containment | Citation Accuracy | Latency | Failure Class |
 |---|---|---|---|---|---|---|---|---|
-| 1 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 1308.78ms | None |
-| 2 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 1136.37ms | None |
-| 3 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 1080.3ms | None |
-| 4 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 1036.81ms | None |
-| 5 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 1038.85ms | None |
-| 6 | paraphrased | `answer` | `grounded` | ✅ | ✅ | ✅ | 1175.79ms | None |
-| 7 | paraphrased | `answer` | `grounded` | ✅ | ✅ | ✅ | 1160.59ms | None |
-| 8 | paraphrased | `answer` | `grounded` | ✅ | ✅ | ✅ | 6192.22ms | None |
-| 9 | paraphrased | `answer` | `grounded` | ✅ | ✅ | ✅ | 10754.64ms | None |
-| 10 | multi_evidence | `answer` | `grounded` | ✅ | ✅ | ✅ | 10075.47ms | None |
-| 11 | multi_evidence | `answer` | `grounded` | ✅ | ✅ | ✅ | 8656.95ms | None |
-| 12 | multi_evidence | `answer` | `grounded` | ✅ | ✅ | ✅ | 9223.28ms | None |
-| 13 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ✅ | 10031.94ms | None |
-| 14 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ✅ | 5552.65ms | None |
-| 15 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ✅ | 10542.58ms | None |
-| 16 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 1251.0ms | None |
-| 17 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 1042.9ms | None |
-| 18 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 629.35ms | None |
-| 19 | adversarial_outofscope | `abstain` | `blocked` | N/A | ✅ | ✅ | 0.27ms | None |
-| 20 | adversarial_outofscope | `abstain` | `abstained` | N/A | ✅ | ✅ | 584.77ms | None |
-| 21 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 618.33ms | None |
-| 22 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ✅ | 5152.68ms | None |
+| 1 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 2393.62ms | None |
+| 2 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 1259.54ms | None |
+| 3 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 12300.08ms | None |
+| 4 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 24774.0ms | None |
+| 5 | direct_factual | `answer` | `grounded` | ✅ | ✅ | ✅ | 18784.68ms | None |
+| 6 | paraphrased | `answer` | `grounded` | ✅ | ✅ | ✅ | 12046.15ms | None |
+| 7 | paraphrased | `answer` | `grounded` | ✅ | ✅ | ✅ | 26250.34ms | None |
+| 8 | paraphrased | `answer` | `grounded` | ❌ | ✅ | ❌ | 16985.23ms | Retrieval Recall Miss |
+| 9 | paraphrased | `answer` | `grounded` | ✅ | ✅ | ✅ | 13752.47ms | None |
+| 10 | multi_evidence | `answer` | `grounded` | ✅ | ✅ | ✅ | 23565.56ms | None |
+| 11 | multi_evidence | `answer` | `grounded` | ❌ | ✅ | ❌ | 16254.75ms | Retrieval Recall Miss |
+| 12 | multi_evidence | `answer` | `grounded` | ✅ | ✅ | ❌ | 14165.47ms | Citation Provenance Mismatch |
+| 13 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ✅ | 23875.4ms | None |
+| 14 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ❌ | 16779.01ms | Citation Provenance Mismatch |
+| 15 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ✅ | 14960.75ms | None |
+| 16 | difficult_retrieval | `answer` | `grounded` | ✅ | ✅ | ✅ | 25909.02ms | None |
+| 17 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 8610.32ms | None |
+| 18 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 4847.84ms | None |
+| 19 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 730.66ms | None |
+| 20 | unanswerable | `abstain` | `abstained` | N/A | ✅ | ✅ | 666.84ms | None |
+| 21 | adversarial_outofscope | `abstain` | `blocked` | N/A | ✅ | ✅ | 0.31ms | None |
+| 22 | adversarial_outofscope | `abstain` | `abstained` | N/A | ✅ | ✅ | 632.77ms | None |
 
 ---
 

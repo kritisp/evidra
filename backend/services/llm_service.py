@@ -4,12 +4,19 @@ EVIDRA LLM & Embeddings Service
 - Embeddings: Google Gemini (models/gemini-embedding-001, 3072 dimensions)
 """
 
+import sys
 import time
 import threading
 from typing import Optional, List
 import groq as groq_sdk
 from google import genai
 import config
+
+if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 1. GROQ LLM SERVICE (Generation)
@@ -70,7 +77,7 @@ def groq_chat(
         key = _next_groq_key(skip=tried_keys)
         if key is None:
             if not _is_fallback and config.GROQ_FALLBACK_MODEL:
-                print(f"⚠️ All Groq keys exhausted on {model}. Trying fallback model {config.GROQ_FALLBACK_MODEL}...")
+                print(f"[FALLBACK] Switching from {model} to fallback model {config.GROQ_FALLBACK_MODEL}...")
                 return groq_chat(
                     system_prompt=system_prompt,
                     user_message=user_message,
@@ -107,19 +114,20 @@ def groq_chat(
             kind = _classify_error(str(e))
 
             if kind == "invalid_key":
-                print(f"🚫 Groq key invalid (suffix ...{key[-6:]})")
+                print(f"[AUTH] Groq key invalid (suffix ...{key[-6:]})")
                 _blocked_keys.add(key)
                 tried_keys.add(key)
                 continue
 
             if kind in ("ratelimit", "quota"):
-                print(f"⏳ Groq rate limit hit (attempt {attempt + 1}). Rotating key...")
-                tried_keys.add(key)
-                time.sleep(config.RETRY_DELAY_SECONDS)
+                print(f"[RATE-LIMIT] Groq rate limit hit on {model} (attempt {attempt + 1}). Backing off...")
+                time.sleep(3.0)
+                if len(config.GROQ_API_KEYS) > 1:
+                    tried_keys.add(key)
                 continue
 
             if kind == "overloaded" and not _is_fallback:
-                print(f"⚠️ Groq overloaded on {model}. Trying fallback...")
+                print(f"[OVERLOAD] Groq overloaded on {model}. Trying fallback...")
                 return groq_chat(
                     system_prompt=system_prompt,
                     user_message=user_message,

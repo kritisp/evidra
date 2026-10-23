@@ -255,6 +255,7 @@ def evidra_query(
         user_message=user_prompt,
         history=history or [],
         temperature=0.1,
+        max_tokens=config.MAX_TOKENS,
     )
 
     # 7. Check if model decided to abstain

@@ -49,7 +49,8 @@ CHROMA_COLLECTION   = os.getenv("CHROMA_COLLECTION", "evidra_documents")
 # ==============================================================================
 CHUNK_SIZE           = int(os.getenv("CHUNK_SIZE", "500"))
 CHUNK_OVERLAP        = int(os.getenv("CHUNK_OVERLAP", "100"))
-TOP_K_RESULTS        = int(os.getenv("TOP_K_RESULTS", "5"))
+TOP_K_RESULTS        = int(os.getenv("TOP_K_RESULTS", "3"))
+MAX_TOKENS           = int(os.getenv("MAX_TOKENS", "512"))
 # Cosine similarity cutoff (S = 1.0 - distance). Relevant >= 0.55, Irrelevant <= 0.50
 SIMILARITY_THRESHOLD = float(os.getenv("SIMILARITY_THRESHOLD", "0.55"))
 STRICT_GROUNDED_MODE = os.getenv("STRICT_GROUNDED_MODE", "true").lower() in ("1", "true", "yes")

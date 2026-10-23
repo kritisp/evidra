@@ -1,49 +1,49 @@
 {
-  "benchmark_timestamp": "2026-10-23T19:15:39Z",
+  "benchmark_timestamp": "2026-10-23T20:01:00Z",
   "total_questions": 22,
   "answerable_count": 16,
   "unanswerable_count": 6,
   "metrics": {
-    "retrieval_recall_at_k": 100.0,
+    "retrieval_recall_at_k": 87.5,
     "factual_containment_pct": 100.0,
-    "citation_accuracy_pct": 100.0,
+    "citation_accuracy_pct": 81.82,
     "abstention_accuracy_pct": 100.0,
-    "overall_accuracy_pct": 100.0,
+    "overall_accuracy_pct": 81.82,
     "false_abstention_count": 0,
     "false_generation_count": 0,
-    "average_latency_ms": 4011.21,
-    "p90_latency_ms": 10075.47
+    "average_latency_ms": 12706.58,
+    "p90_latency_ms": 24774.0
   },
   "category_breakdown": {
-    "adversarial_outofscope": {
-      "count": 2,
-      "overall_accuracy_pct": 100.0,
-      "avg_latency_ms": 292.52
-    },
-    "difficult_retrieval": {
-      "count": 4,
-      "overall_accuracy_pct": 100.0,
-      "avg_latency_ms": 7819.96
-    },
     "direct_factual": {
       "count": 5,
       "overall_accuracy_pct": 100.0,
-      "avg_latency_ms": 1120.22
-    },
-    "multi_evidence": {
-      "count": 3,
-      "overall_accuracy_pct": 100.0,
-      "avg_latency_ms": 9318.57
+      "avg_latency_ms": 11902.38
     },
     "paraphrased": {
       "count": 4,
-      "overall_accuracy_pct": 100.0,
-      "avg_latency_ms": 4820.81
+      "overall_accuracy_pct": 75.0,
+      "avg_latency_ms": 17258.55
+    },
+    "multi_evidence": {
+      "count": 3,
+      "overall_accuracy_pct": 33.33,
+      "avg_latency_ms": 17995.26
+    },
+    "difficult_retrieval": {
+      "count": 4,
+      "overall_accuracy_pct": 75.0,
+      "avg_latency_ms": 20381.05
     },
     "unanswerable": {
       "count": 4,
       "overall_accuracy_pct": 100.0,
-      "avg_latency_ms": 885.39
+      "avg_latency_ms": 3713.91
+    },
+    "adversarial_outofscope": {
+      "count": 2,
+      "overall_accuracy_pct": 100.0,
+      "avg_latency_ms": 316.54
     }
   }
 }
