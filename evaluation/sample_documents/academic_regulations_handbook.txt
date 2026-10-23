@@ -1,0 +1,54 @@
+================================================================================
+INSTITUTE OF ADVANCED COMPUTING & ARTIFICIAL INTELLIGENCE
+ACADEMIC REGULATIONS & STUDENT POLICY HANDBOOK (2025-2026)
+================================================================================
+
+SECTION 1: ADMISSIONS AND ACADEMIC INTEGRITY (Page 1)
+1.1 Enrollment Eligibility:
+Candidates must have completed an undergraduate degree in Computer Science, Engineering, Mathematics, or a cognate technical discipline with a minimum cumulative score of 65% or 6.8 CGPA on a 10-point scale. International candidates must provide certified English proficiency credentials (minimum TOEFL iBT score of 90 or IELTS Academic band 6.5).
+
+1.2 Code of Academic Integrity:
+Students are expected to uphold the highest standards of intellectual honesty. Any unauthorized collaboration, data fabrication, or unauthorized use of artificial intelligence generators without documented instructor permission constitutes academic misconduct. Minor infractions will lead to a grade deduction of one full letter grade. Egregious or repeated violations result in formal expulsion reviewed by the Senate Academic Ethics Board.
+SECTION 2: ATTENDANCE, LEAVE, AND EXAMINATION POLICIES (Page 2)
+2.1 Minimum Attendance Requirement:
+Students must maintain a mandatory minimum attendance of 75 percent in each enrolled lecture and laboratory course to be eligible to sit for the end-semester final examinations.
+
+2.2 Medical Condonation and Leave Approval:
+If a student's attendance falls between 65 percent and 74.9 percent due to verified medical hospitalization or bereavement, the Dean of Academic Affairs may grant an attendance condonation upon receipt of authentic hospital discharge summaries submitted within five calendar days of return. Under no circumstances can a student with less than 65 percent attendance appear for final examinations; such students will be formally debarred from the course and assigned an 'FA' (Failure due to Attendance) grade.
+
+2.3 Examination Conduct:
+Final examinations carry a weightage of 50 percent of the aggregate course grade. Mid-term assessments contribute 30 percent, and continuous lab assignments contribute 20 percent.
+SECTION 3: GRADING SYSTEM, CGPA, AND SCHOLASTIC STANDING (Page 3)
+3.1 Letter Grading Scale:
+Grades are allocated on a 10-point relative grading scale:
+- Grade 'A+' (Outstanding): 10 grade points (Top 5 percentile)
+- Grade 'A' (Excellent): 9 grade points
+- Grade 'B' (Very Good): 8 grade points
+- Grade 'C' (Satisfactory): 6 grade points
+- Grade 'D' (Marginal Pass): 4 grade points
+- Grade 'F' (Fail): 0 grade points
+
+3.2 Dean's Honor List:
+Undergraduate and graduate students who achieve a Semester Grade Point Average (SGPA) of 9.20 or higher while carrying at least 16 earned credit units, with no incomplete or repeated grades, are conferred the Dean's Honor Roll distinction.
+
+3.3 Academic Probation:
+A student whose Cumulative Grade Point Average (CGPA) falls below 5.50 at the conclusion of any regular semester is placed on Academic Probation. The student is restricted to a maximum of 12 credits during the probationary semester and must attend weekly peer tutoring sessions. Failure to elevate the CGPA above 5.50 within two consecutive semesters leads to academic disqualification.
+SECTION 4: CAPSTONE RESEARCH, PLAGIARISM THRESHOLD, AND DEFENSE (Page 4)
+4.1 Capstone Research Thesis:
+Every final-year candidate must register for an 8-credit Capstone Project spanning two academic terms. The project must produce an original software artifact or empirical research paper supervised by a full-time faculty advisor.
+
+4.2 Plagiarism & Similarity Index Policy:
+All project reports and theses must undergo automated similarity verification prior to submission. The maximum permissible Turnitin similarity threshold is 10 percent, excluding cited bibliographic references and standard mathematical formulae. Reports exceeding 10 percent similarity will be rejected, and the candidate must resubmit within 14 calendar days subject to a 10 percent grade penalty.
+
+4.3 Oral Defense Panel:
+Final defenses are evaluated by a three-member examination committee consisting of the research advisor, an internal departmental examiner, and an appointed external examiner from an accredited university or industry research lab. Unanimous committee approval is mandatory for thesis conferral.
+SECTION 5: TUITION REFUND, WITHDRAWAL, AND INTELLECTUAL PROPERTY (Page 5)
+5.1 Course Withdrawal and Refund Schedule:
+Students requesting formal withdrawal from the academic program are eligible for partial tuition refunds based on the institutional refund schedule:
+- Withdrawal submitted 15 calendar days or more prior to semester commencement: 100 percent refund of net tuition fees minus a 50 dollar processing charge.
+- Withdrawal submitted between 1 and 14 days prior to semester start: 80 percent refund.
+- Withdrawal submitted within the first 14 calendar days of class commencement: 50 percent refund.
+- Withdrawal submitted after the 14th day of classes: 0 percent refund (No refund permissible).
+
+5.2 Intellectual Property (IP) Rights:
+Inventions, algorithms, and patentable software developed independently by students using standard campus computing infrastructure remain the exclusive property of the student. However, when technologies are created within sponsored industry grants or government contracts, patent rights are co-owned jointly between the student and the Institute in a 60/40 revenue-sharing ratio.

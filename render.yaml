@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: evidra-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY_1
+        sync: false
+      - key: GROQ_API_KEY_2
+        sync: false
+      - key: GROQ_API_KEY_3
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_EMBED_MODEL
+        value: models/gemini-embedding-001
+      - key: EMBED_DIMENSION
+        value: "3072"
+      - key: CHROMA_PERSIST_DIR
+        value: /data/chroma_db
+      - key: CHROMA_COLLECTION
+        value: evidra_documents
+      - key: CHUNK_SIZE
+        value: "500"
+      - key: CHUNK_OVERLAP
+        value: "100"
+      - key: TOP_K_RESULTS
+        value: "5"
+      - key: SIMILARITY_THRESHOLD
+        value: "0.40"
+      - key: STRICT_GROUNDED_MODE
+        value: "true"
+      - key: MAX_FILE_SIZE_MB
+        value: "25"
+    disk:
+      name: chroma-storage
+      mountPath: /data
+      sizeGB: 1
+    healthCheckPath: /api/health
+    autoDeploy: true

@@ -1,0 +1,36 @@
+# Python & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environments
+venv/
+.venv/
+backend/venv/
+
+# Node & Frontend Build Artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/*.local
+
+# Secrets & Environment Variables (NEVER COMMIT)
+.env
+*.env
+backend/.env
+backend/*.env
+
+# Vector Databases & Local Persist Dirs
+chroma_db/
+backend/chroma_db/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Logs & Temporary Scratch
+*.log
+*.tmp
+uploads/
